@@ -2,9 +2,10 @@ package com.practice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
 @Configuration //@Configuration annotation is used to indicate that a class is a source of bean definitions
+@Profile("dev")
 public class ApplicationConfig {
     //this has a method bean of Practice Class which returns a new PracticeClass() object which is
     //marked as a bean and scanned by spring as this is annotated with @configuration which helps detects
@@ -20,10 +21,21 @@ public class ApplicationConfig {
     public PracticeClass practiceClass2(){
         return new PracticeClass("second bean");
     }
-    @Bean
-    @Primary //gives this bean the topmost priority among all the beans of the same type
+    @Bean("bean1")
+    //@Profile("dev")//in this way we can make this bean available only for this dev environment
+    //@Primary //gives this bean the topmost priority among all the beans of the same type
     public PracticeClass practiceClass3(){
-        return new PracticeClass("third bean");
+        return new PracticeClass("dev bean");
+    }
+    @Bean
+    public PracticeClass myFirstClass1(){
+        return new PracticeClass("all bean");
+    }
+
+    @Bean("bean2")
+   // @Profile("test")
+    public PracticeClass myFirstClass2(){
+        return new PracticeClass("test bean");
     }
 }
 
