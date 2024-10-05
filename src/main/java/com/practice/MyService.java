@@ -32,7 +32,7 @@ public class MyService {
     private String customProperty;
 
 
-    public String readProp() { //get the property from and read
+    public String readProp() { //get the property from and read from there
         return environment.getProperty("my.custom.property");
     }
 
